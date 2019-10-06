@@ -22,14 +22,16 @@ public class MainActivity extends AppCompatActivity {
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, AdminLoginActivity.class);
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                i.putExtra("title","User");
                 startActivity(i);
             }
         });
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, AdminLoginActivity.class);
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                i.putExtra("title","Admin");
                 startActivity(i);
 
             }

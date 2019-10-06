@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AdminLoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 EditText mEmail,mPassword;
 
 Button email_sign_in_button,email_login_button;
@@ -29,7 +29,11 @@ String TAG = "AdmmnLOginActivity";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
 
+Intent i = getIntent();
+final String title = i.getStringExtra("title");
 
+setTitle(title+" Authentication");
+//getSupportActionBar().setTitle(title);
         FirebaseApp.initializeApp(getApplicationContext());
     email_login_button = findViewById(R.id.login);
 
@@ -52,7 +56,7 @@ String TAG = "AdmmnLOginActivity";
             String password = mPassword.getText().toString().trim();
 
             mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(AdminLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -62,13 +66,22 @@ String TAG = "AdmmnLOginActivity";
                                 // FirebaseUser user = mAuth.getCurrentUser();
 
                                 Toast.makeText(getApplicationContext(), "SUCCESSFUL REGISTRATION", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(AdminLoginActivity.this, AdminDashboard.class);
-                                startActivity(intent);
+
+                                //data entry
+                                if(title.equalsIgnoreCase("admin")) {
+                                    Intent intent = new Intent(LoginActivity.this, AdminDataUpload.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Intent intent = new Intent(LoginActivity.this, UserDataUpload.class);
+                                    startActivity(intent);
+
+                                }
 
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(AdminLoginActivity.this, "Authentication failed.",
+                                Toast.makeText(LoginActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
 
                             }
@@ -92,17 +105,23 @@ String TAG = "AdmmnLOginActivity";
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
-                                Toast.makeText(AdminLoginActivity.this, "Authentication successful.",
+                                Toast.makeText(LoginActivity.this, "Authentication successful.",
                                         Toast.LENGTH_SHORT).show();
 
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent= new Intent(AdminLoginActivity.this,AdminDashboard.class);
-                                startActivity(intent);
+                                if(title.equalsIgnoreCase("admin")) {
+                                    Intent intent = new Intent(LoginActivity.this, AdminDashboard.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Intent intent = new Intent(LoginActivity.this, UserDashboard.class);
+                                    startActivity(intent);
 
+                                }
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(AdminLoginActivity.this, "Authentication failed.",
+                                Toast.makeText(LoginActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
 
                             }

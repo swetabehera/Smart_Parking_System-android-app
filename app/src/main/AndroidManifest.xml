@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.smartparking">
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -10,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GuestLoginActivity"></activity>
-        <activity android:name=".AdminLoginActivity" />
-
+        <activity android:name=".UserDataUpload"></activity>
+        <activity android:name=".AdminDataUpload" />
+        <activity android:name=".GuestLoginActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".UserDashboard" />
         <activity android:name=".AdminDashboard" />
         <activity android:name=".MainActivity">
@@ -23,5 +23,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
