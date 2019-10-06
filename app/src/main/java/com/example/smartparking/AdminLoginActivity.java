@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class AdminLoginActivity extends AppCompatActivity {
 EditText mEmail,mPassword;
+
 Button email_sign_in_button,email_login_button;
 String TAG = "AdmmnLOginActivity";
     private FirebaseAuth mAuth;
@@ -27,7 +28,6 @@ String TAG = "AdmmnLOginActivity";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
-
 
 
         FirebaseApp.initializeApp(getApplicationContext());

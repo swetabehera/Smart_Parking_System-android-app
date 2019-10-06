@@ -10,16 +10,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ADMIN LOGIN"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:id="@+id/admin_login_button"
         android:layout_centerVertical="true"/>
-
-
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+android:text="guest login"
+    android:id="@+id/guest"
+    android:layout_margin="20dp"
+    android:textAllCaps="true"
+    android:layout_below="@id/admin_login_button"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="USER LOGIN"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:id="@+id/user_login_button"
         android:layout_above="@id/admin_login_button"/>
 

@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    Button admin,user;
+    Button admin,user,guest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,15 @@ public class MainActivity extends AppCompatActivity {
 
         admin=findViewById(R.id.admin_login_button);
         user= findViewById(R.id.user_login_button);
+        guest=findViewById(R.id.guest);
 
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, AdminLoginActivity.class);
+                startActivity(i);
+            }
+        });
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -27,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        user.setOnClickListener(new View.OnClickListener() {
+        guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i =new Intent(MainActivity.this, UserLoginActivity.class);
+                Intent i =new Intent(MainActivity.this, GuestLoginActivity.class);
                 startActivity(i);
             }
         });
