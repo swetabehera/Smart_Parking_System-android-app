@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -45,6 +46,7 @@ public class UserLoginActivity extends AppCompatActivity {
      password=findViewById(R.id.password);
 
         registerReceiver(receiver2,new IntentFilter("Message Receiver"));
+
         if(ContextCompat.checkSelfPermission(getBaseContext(),"android.permission.RECEIVE_SMS")!= PackageManager.PERMISSION_GRANTED)
         {
             int CODEREQ = 124;
@@ -58,7 +60,6 @@ public class UserLoginActivity extends AppCompatActivity {
         }
 
      //   findViews();
-        StartFirebaseLogin();
 
         password.setInputType(InputType.TYPE_NULL);
 
@@ -72,15 +73,18 @@ public class UserLoginActivity extends AppCompatActivity {
                         TimeUnit.SECONDS,                // Unit of timeout
                         UserLoginActivity.this,        // Activity (for callback binding)
                         mCallback);                      // OnVerificationStateChangedCallbacks
+                Toast.makeText(getApplicationContext(),"sms code sent!!",Toast.LENGTH_SHORT).show();
             }
         });
-        //Above method will send an SMS to the provided phone number. As verifyPhoneNumber() is reentrant, it will not send another SMS on button click until the original request is timed out.
+        //Above method will send an SMS to the provided phone number. As verifyPhoneNumber() is reentrant, it will not send another
+        // SMS on button click until the original request is timed out.
 
         password.setInputType(InputType.TYPE_CLASS_TEXT);
         password.requestFocus();
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mgr.showSoftInput(password, InputMethodManager.SHOW_FORCED);
 
+        StartFirebaseLogin();
 
         verifyPhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +95,10 @@ public class UserLoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
     private void SigninWithPhone(PhoneAuthCredential credential) {
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -117,11 +125,12 @@ public class UserLoginActivity extends AppCompatActivity {
         mCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                Toast.makeText(UserLoginActivity.this,"verification completed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserLoginActivity.this,"verification completed: "+phoneAuthCredential.getProvider(),Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                Toast.makeText(UserLoginActivity.this,"verification failed",Toast.LENGTH_SHORT).show();
+                Log.v("userLogin",e.toString());
+                Toast.makeText(UserLoginActivity.this,"verification failed"+e.toString(),Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
@@ -131,6 +140,8 @@ public class UserLoginActivity extends AppCompatActivity {
             }
         };
     }
+
+
     BroadcastReceiver receiver2 = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

@@ -34,7 +34,7 @@ String TAG = "AdmmnLOginActivity";
     email_login_button = findViewById(R.id.login);
 
     // Set up the login form.
-    mEmail = findViewById(R.id.email);
+    mEmail = findViewById(R.id.username);
     //  populateAutoComplete();
 
     mPassword = findViewById(R.id.password);
@@ -48,8 +48,8 @@ String TAG = "AdmmnLOginActivity";
         email_sign_in_button.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String email = mEmail.getText().toString();
-            String password = mPassword.getText().toString();
+            String email = mEmail.getText().toString().trim();
+            String password = mPassword.getText().toString().trim();
 
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(AdminLoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -92,6 +92,9 @@ String TAG = "AdmmnLOginActivity";
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
+                                Toast.makeText(AdminLoginActivity.this, "Authentication successful.",
+                                        Toast.LENGTH_SHORT).show();
+
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Intent intent= new Intent(AdminLoginActivity.this,AdminDashboard.class);
                                 startActivity(intent);
