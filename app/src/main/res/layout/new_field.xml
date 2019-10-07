@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal" >
+    <EditText
+        android:id="@+id/value_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        android:inputType="textPostalAddress"
+        android:selectAllOnFocus="true"/>
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:background="@android:drawable/ic_delete"
+        android:onClick="deleteField"/>
+</LinearLayout>
+
+    <!--
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/parent_relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_margin="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText
+        android:id="@+id/value_edit_text
+        android:layout_width="0dp"
+        android:layout_weight="8"
+        android:layout_height="wrap_content"
+        android:inputType="phone"/>
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_toRightOf="@id/value_edit_text"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:onClick="deleteField"
+        android:background="@android:drawable/ic_delete" />
+
+
+</LinearLayout>-->
+
+
