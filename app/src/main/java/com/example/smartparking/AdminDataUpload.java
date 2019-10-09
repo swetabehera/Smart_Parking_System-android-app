@@ -132,21 +132,24 @@ ParkingSlotObject parkingSlotObject;
 
 
     }
-     /*void deleteParkingSlot(View v)
+     void deleteParkingSlot(View v)
     {
         // TO DO: delete a row from areas table
-        EditText edt= v.findViewById(R.id.area_edit_text);
+        LinearLayout view = (LinearLayout)v.getParent();
 
-        DatabaseReference dtl=FirebaseDatabase.getInstance().getReference(parkingSlot).child(edt.getText().toString());
+        EditText etd = view.findViewById(R.id.area_edit_text);
+        String name=etd.getText().toString();
+
+        DatabaseReference dtl=FirebaseDatabase.getInstance().getReference(parkingSlot).child(name+"__");
         dtl.removeValue();
         Toast.makeText(this, "area node deleted", Toast.LENGTH_SHORT).show();
 
-    }*/
+    }
 
 
     public void deleteField(View v) {
 
-    //deleteParkingSlot(v);
+    deleteParkingSlot(v);
     parentLinearLayout.removeView((View) v.getParent());
     }
 
@@ -157,9 +160,7 @@ ParkingSlotObject parkingSlotObject;
 
         EditText etd = view.findViewById(R.id.area_edit_text);
         String name=etd.getText().toString();
-        if(name==null)
-            Toast.makeText(this, "Name of the area is required!", Toast.LENGTH_SHORT).show();
-
+        
         Log.v("uploading area",etd.getText().toString()+" hela?");
 
         String pushingId = parkingSlotRef.push().getKey();
@@ -184,7 +185,8 @@ ParkingSlotObject parkingSlotObject;
 
         if(name!=null) {
             parkingSlotRef.child(name+"__").setValue(parkingSlotObject);
-        v.setVisibility(View.INVISIBLE);}else
+        v.setVisibility(View.INVISIBLE);
+            Toast.makeText(this, "area uploaded", Toast.LENGTH_SHORT).show();}else
         {
             v.setVisibility(View.VISIBLE);
             uploadField(v);
