@@ -183,7 +183,7 @@ ParkingSlotObject parkingSlotObject;
         //error here!!!!!!!!!! admin obj accept karuchi but parking slot nuhain ...authare obj baneili
 
         if(name!=null) {
-            parkingSlotRef.child(name).setValue(parkingSlotObject);
+            parkingSlotRef.child(name+"__").setValue(parkingSlotObject);
         v.setVisibility(View.INVISIBLE);}else
         {
             v.setVisibility(View.VISIBLE);
