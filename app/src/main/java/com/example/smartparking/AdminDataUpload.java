@@ -11,13 +11,18 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AdminDataUpload extends AppCompatActivity {
     private LinearLayout parentLinearLayout;
+    String pushingIdAdmin;
     Button add,del,done,upload;
     private DatabaseReference
             //vehRef,userRef,
@@ -60,38 +65,88 @@ ParkingSlotObject parkingSlotObject;
         parkingSlotObject= new ParkingSlotObject();
        // uploadParkSlot();
 
-        final String pushingIdAdmin= adminRef.push().getKey();
+        pushingIdAdmin= adminRef.push().getKey();
         adminId=pushingIdAdmin;
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v("ethi","button pressed");
-
-                Log.v("ethi","key extracted"+pushingIdAdmin);
-
-
                 adminObject.setKey(pushingIdAdmin);
                 adminObject.setName(name.getText().toString());
-                Log.v("ethi","values assigned");
+                Log.v("retrieval","reached here1");
+
+                if (chk1Area())
+                {
+                    Log.v("retrieval","reached here");
+
+                    adminRef.child(pushingIdAdmin).setValue(adminObject);
+
+                    Toast.makeText(getApplicationContext(), "UPLOADED DATA TO DB", Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(AdminDataUpload.this, AdminDashboard.class);
+                    startActivity(i);
+                } else {
+                    Log.v("retrieval","reached here else");
+
+                    Toast.makeText(AdminDataUpload.this, "Give at least 1 area", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
+    }
+boolean x;
+     boolean chk1Area() {
+
+x=false;
+        parkingSlotRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+              //  Log.v("retrieval","error here");
+
+               for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                   ParkingSlotObject value = postSnapshot.getValue(ParkingSlotObject.class);
+                   Log.v("retrieval", "error" + value.getNameOfArea()+"\n"+value.getAdminId()+"\n"+adminId);
+
+                   x=value.getAdminId().equals(adminId);
+                   if (x)
+                   {
+                       adminRef.child(pushingIdAdmin).setValue(adminObject);
+
+                       Toast.makeText(getApplicationContext(), "UPLOADED DATA TO DB", Toast.LENGTH_SHORT).show();
+
+                       Intent i = new Intent(AdminDataUpload.this, AdminDashboard.class);
+                       startActivity(i);
+
+                       break;
+                    }
+               }
+
+                if(x)
+                Log.v("retrieval returned:","h true" );
+else
+                Log.v("retrieval returned:","false h" );
 
 
-                Log.v("ethi",adminObject.getKey()+"\n"+adminObject.getName()+"\n"+adminObject.getAvgUsage()+"\n"+adminObject.getPricePerHour());
 
-                adminRef.child(pushingIdAdmin).setValue(adminObject);
-                Log.v("ethi","child created");
+            }
 
-
-                Toast.makeText(getApplicationContext(),"UPLOADED DATA TO DB",Toast.LENGTH_SHORT).show();
-
-                Intent i= new Intent(AdminDataUpload.this,AdminDashboard.class);
-                //  i.putExtra("new",true);
-                startActivity(i);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(AdminDataUpload.this, "error in retrieving", Toast.LENGTH_SHORT).show();
+                Log.v("retrieval"," Retreival error"+databaseError);
 
 
             }
         });
+if(x)
+Log.v("retrieval returned:","true" );
+else
+    Log.v("retrieval returned:","false" );
 
+    return x;
     }
 /*
     private void uploadParkingSlot() {
@@ -160,7 +215,7 @@ ParkingSlotObject parkingSlotObject;
 
         EditText etd = view.findViewById(R.id.area_edit_text);
         String name=etd.getText().toString();
-        
+
         Log.v("uploading area",etd.getText().toString()+" hela?");
 
         String pushingId = parkingSlotRef.push().getKey();
