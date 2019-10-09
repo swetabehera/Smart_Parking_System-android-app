@@ -5,6 +5,30 @@ public class AdminObject {
     float avgUsage,peakHr,lowHr, pricePerHour;
     String name, key;
 
+    public float getAvgUsage() {
+        return avgUsage;
+    }
+
+    public float getPeakHr() {
+        return peakHr;
+    }
+
+    public float getLowHr() {
+        return lowHr;
+    }
+
+    public float getPricePerHour() {
+        return pricePerHour;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
     public void setKey(String key) {
         this.key = key;
     }
@@ -30,7 +54,10 @@ public class AdminObject {
     }
     AdminObject()
     {
-        avgUsage=peakHr=lowHr=pricePerHour=0;
+        avgUsage=0;
+        peakHr=0;
+        lowHr=0;
+        pricePerHour=0;
         name=null ;
         key=null;
 

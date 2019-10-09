@@ -4,10 +4,10 @@
     android:layout_height="50dp"
     android:orientation="horizontal" >
     <EditText
-        android:id="@+id/value_edit_text"
+        android:id="@+id/area_edit_text"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="9"
+        android:layout_weight="8"
         android:inputType="textPostalAddress"
         android:selectAllOnFocus="true"/>
 
@@ -18,6 +18,13 @@
         android:layout_weight="1"
         android:background="@android:drawable/ic_delete"
         android:onClick="deleteField"/>
+    <Button
+        android:id="@+id/upload_button"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:background="@android:drawable/ic_menu_upload"
+        android:onClick="uploadField"/>
 </LinearLayout>
 
     <!--

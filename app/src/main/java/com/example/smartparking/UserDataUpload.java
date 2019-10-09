@@ -37,4 +37,7 @@ TextView txtvw;
         // TO DO: delete a row from areas table
         parentLinearLayout.removeView((View) v.getParent());
     }
+
+    public void uploadField(View view) {
+    }
 }
