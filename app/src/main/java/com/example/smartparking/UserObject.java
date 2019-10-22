@@ -1,4 +1,5 @@
 package com.example.smartparking;
+//user and admin profiles re delete admin or user account
 
 public class UserObject {
     String name,key, startTime,currentLocn,endTime, favLocn, vehicleNo, payment;
@@ -34,6 +35,39 @@ public class UserObject {
     public String getEndTime() {
         return endTime;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getCurrentLocn() {
+        return currentLocn;
+    }
+
+    public void setCurrentLocn(String currentLocn) {
+        this.currentLocn = currentLocn;
+    }
+
+    public String getFavLocn() {
+        return favLocn;
+    }
+
+    public String getVehicleNo() {
+        return vehicleNo;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
     UserObject()
     {
         name=null;

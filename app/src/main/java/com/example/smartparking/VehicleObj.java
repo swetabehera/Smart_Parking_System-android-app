@@ -13,6 +13,26 @@ public class VehicleObj {
         this.noOfWheels = noOfWheels;
     }
 
+    public int getNoOfWheels() {
+        return noOfWheels;
+    }
+
+    public float getDimension() {
+        return dimension;
+    }
+
+    public String getVehno() {
+        return vehno;
+    }
+
+    public String getVehId() {
+        return vehId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }

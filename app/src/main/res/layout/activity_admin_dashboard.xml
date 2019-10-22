@@ -9,10 +9,94 @@
         android:id="@+id/txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="adin dashboard!!!"
+        android:text="admin dashboard!!!"
         />
     <TextView
-        android:id="@+id/userid"
+        android:id="@+id/adminIdTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt"
+        android:text="adminId"
+        android:textAllCaps="true"
+        />
+    <TextView
+        android:id="@+id/adminId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt"
+        android:layout_toRightOf="@id/adminIdTXT"
+        android:hint="adminId"
+        android:layout_toEndOf="@id/adminIdTXT" />
+    <TextView
+        android:id="@+id/adminNameTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/adminIdTXT"
+android:text="admin name"
+        android:textAllCaps="true"/>
+    <TextView
+        android:id="@+id/adminName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/adminNameTXT"
+        android:layout_below="@id/adminIdTXT"
+        android:hint="admin name"
+        android:textAllCaps="true"/>
+
+
+    <TextView
+    android:id="@+id/lowhr"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:hint="lowhr"
+    android:layout_toRightOf="@id/lowhrTXT"
+        android:layout_below="@id/adminName"
+    />
+
+    <TextView
+        android:text="low hours"
+        android:textAllCaps="true"
+        android:id="@+id/lowhrTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/adminNameTXT"
+        />
+
+    <TextView
+    android:id="@+id/peakhr"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@id/txt"
+    />
+    <TextView
+    android:id="@+id/pricePerHR"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@id/txt"
+    />
+    <TextView
+    android:id="@+id/avgUsage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@id/txt"
+    />
+
+    <TextView
+        android:id="@+id/peakhrTXT"
+        android:layout_below="@id/lowhrTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="avg usage"
+
+        />
+    <TextView
+        android:id="@+id/pricePerHR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/txt"
+        />
+    <TextView
+        android:id="@+id/avgUsage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/txt"

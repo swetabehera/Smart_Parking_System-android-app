@@ -35,6 +35,7 @@ public class AdminDataUpload extends AppCompatActivity {
             //vehicle="VEHICLE",
     adminId,
     //user="USER",
+    email,
     admin="ADMIN",
     parkingSlot="PARKING_SLOT";
     //vehParked="VEHICLE_PARKED",
@@ -52,7 +53,8 @@ ParkingSlotObject parkingSlotObject;
 
         parkingSlotRef=FirebaseDatabase.getInstance().getReference(parkingSlot);
 
-
+email=getIntent().getStringExtra("email");
+final String newemail=email.replace('.','_');
         area=findViewById(R.id.area_edit_text);
         name=findViewById(R.id.name_edit);
         upload=findViewById(R.id.upload_button);
@@ -75,15 +77,19 @@ ParkingSlotObject parkingSlotObject;
                 adminObject.setName(name.getText().toString());
                 Log.v("retrieval","reached here1");
 
-                if (chk1Area())
+                if (true)//chk1Area())
                 {
                     Log.v("retrieval","reached here");
+                    String child=/*pushingIdAdmin+"_"+*/ newemail;
+                    Log.v("retrieval","reached here child "+child);
 
-                    adminRef.child(pushingIdAdmin).setValue(adminObject);
+                    adminRef.child(child).setValue(adminObject);
 
                     Toast.makeText(getApplicationContext(), "UPLOADED DATA TO DB", Toast.LENGTH_SHORT).show();
 
                     Intent i = new Intent(AdminDataUpload.this, AdminDashboard.class);
+
+                    i.putExtra("adminkey",child);
                     startActivity(i);
                 } else {
                     Log.v("retrieval","reached here else");
@@ -95,11 +101,11 @@ ParkingSlotObject parkingSlotObject;
         });
 
     }
-boolean x;
+        boolean x;
      boolean chk1Area() {
 
-x=false;
-        parkingSlotRef.addValueEventListener(new ValueEventListener() {
+          x=false;
+          parkingSlotRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -118,6 +124,7 @@ x=false;
                        Toast.makeText(getApplicationContext(), "UPLOADED DATA TO DB", Toast.LENGTH_SHORT).show();
 
                        Intent i = new Intent(AdminDataUpload.this, AdminDashboard.class);
+                       i.putExtra("adminkey",adminId);
                        startActivity(i);
 
                        break;
@@ -195,7 +202,7 @@ else
         EditText etd = view.findViewById(R.id.area_edit_text);
         String name=etd.getText().toString();
 
-        DatabaseReference dtl=FirebaseDatabase.getInstance().getReference(parkingSlot).child(name+"__");
+        DatabaseReference dtl=FirebaseDatabase.getInstance().getReference(parkingSlot).child(name+adminId+"__");
         dtl.removeValue();
         Toast.makeText(this, "area node deleted", Toast.LENGTH_SHORT).show();
 
@@ -239,7 +246,7 @@ else
         //error here!!!!!!!!!! admin obj accept karuchi but parking slot nuhain ...authare obj baneili
 
         if(name!=null) {
-            parkingSlotRef.child(name+"__").setValue(parkingSlotObject);
+            parkingSlotRef.child(name+adminId+"__").setValue(parkingSlotObject);//name+adminid+__
         v.setVisibility(View.INVISIBLE);
             Toast.makeText(this, "area uploaded", Toast.LENGTH_SHORT).show();}else
         {

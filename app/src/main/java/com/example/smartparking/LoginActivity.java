@@ -52,7 +52,7 @@ setTitle(title+" Authentication");
         email_sign_in_button.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String email = mEmail.getText().toString().trim();
+            final String email = mEmail.getText().toString().trim();
             String password = mPassword.getText().toString().trim();
 
             mAuth.createUserWithEmailAndPassword(email, password)
@@ -70,10 +70,12 @@ setTitle(title+" Authentication");
                                 //data entry
                                 if(title.equalsIgnoreCase("admin")) {
                                     Intent intent = new Intent(LoginActivity.this, AdminDataUpload.class);
-                                    startActivity(intent);
+                                   intent.putExtra("email",email);
+                                   startActivity(intent);
                                 }
                                 else{
                                     Intent intent = new Intent(LoginActivity.this, UserDataUpload.class);
+                                    intent.putExtra("email",email);
                                     startActivity(intent);
 
                                 }
@@ -95,7 +97,7 @@ setTitle(title+" Authentication");
         email_login_button.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String email = mEmail.getText().toString();
+            final String email = mEmail.getText().toString();
             String password = mPassword.getText().toString();
 
             mAuth.signInWithEmailAndPassword(email, password)
@@ -111,10 +113,12 @@ setTitle(title+" Authentication");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 if(title.equalsIgnoreCase("admin")) {
                                     Intent intent = new Intent(LoginActivity.this, AdminDashboard.class);
+                                    intent.putExtra("email",email);
                                     startActivity(intent);
                                 }
                                 else{
                                     Intent intent = new Intent(LoginActivity.this, UserDashboard.class);
+                                    intent.putExtra("email",email);
                                     startActivity(intent);
 
                                 }
