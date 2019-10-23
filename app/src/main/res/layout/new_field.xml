@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:orientation="horizontal" >
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:id="@+id/layuot"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
     <EditText
+
         android:id="@+id/area_edit_text"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="8"
         android:inputType="textPostalAddress"
         android:selectAllOnFocus="true"/>
+
 
     <Button
         android:id="@+id/delete_button"
@@ -26,7 +35,25 @@
         android:background="@android:drawable/ic_menu_upload"
         android:onClick="uploadField"/>
 </LinearLayout>
+    <EditText
 
+        android:id="@+id/from_time_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layuot"
+        android:hint="from time"
+        android:inputType="time"
+        android:selectAllOnFocus="true"/>
+    <EditText
+
+        android:id="@+id/to_time_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/from_time_edit_text"
+        android:hint="to time"
+        android:inputType="time"
+        android:selectAllOnFocus="true"/>
+</RelativeLayout>
     <!--
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:id="@+id/parent_relative_layout"
