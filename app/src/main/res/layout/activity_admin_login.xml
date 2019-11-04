@@ -15,23 +15,22 @@
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sign_in"
+        android:layout_below="@id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="64dp"
         android:text="login" />
 
     <Button
         android:id="@+id/sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/password"
+        android:layout_below="@id/login"
         android:layout_centerHorizontal="true"
         android:layout_gravity="start"
         android:layout_marginTop="30dp"
-        android:text="sign in" />
+        android:text="sign up" />
 
     <EditText
         android:id="@+id/password"
